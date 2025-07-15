@@ -1,0 +1,16 @@
+# Node & TypeScript
+node_modules/
+dist/
+*.log
+.env
+
+# Angular built files
+client/dist/
+server/dist/
+
+# OS noise
+.DS_Store
+Thumbs.db
+
+# VSCode
+.vscode/
