@@ -1,22 +1,22 @@
 {
   "name": "open-zilla",
   "version": "1.0.0",
-  "description": "open soucre web based file manager",
+  "description": "Open source web-based file manager",
   "main": "server/dist/index.js",
   "scripts": {
     "postinstall": "cd client && npm install && cd ../server && npm install",
-    "start:server": "tsc -p server && node server/dist/index.js",
+    "start:server": "npm run build:server && node server/dist/index.js",
     "start:dev": "concurrently \"npm run server:watch\" \"npm run client:serve\"",
-    "server:watch": "tsc -w -p server",
-    "client:serve": "cd client && ng serve",
-    "build:client": "cd client && ng build",
+    "server:watch": "cd server && npm run start:watch",
+    "client:serve": "cd client && npm start",
+    "build:client": "cd client && npm run build",
     "build:server": "tsc -p server",
     "build": "npm run build:client && npm run build:server",
     "debug:server": "nodemon --watch server/src --exec \"ts-node\" server/src/index.ts"
-  },
+    },
   "dependencies": {
     "express": "^4.18.2",
-    "graphql": "^16.8.1",
+    "graphql": "^15.8.0",
     "express-graphql": "^0.12.0"
   },
   "devDependencies": {

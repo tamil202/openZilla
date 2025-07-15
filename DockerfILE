@@ -1,0 +1,27 @@
+# Use Node base image
+FROM node:22-alpine
+
+# Set working dir
+WORKDIR /app
+
+# Copy root package files first (for layer caching)
+COPY package*.json ./
+
+# Copy client and server package files too (optional if you run separate npm install)
+COPY client/package*.json ./client/
+COPY server/package*.json ./server/
+
+# Install all dependencies (root + subfolders)
+RUN npm install
+
+# Copy everything else
+COPY . .
+
+# Build Angular client + Node server
+RUN npm run build
+
+# Expose server port (adjust if your server runs on different port)
+EXPOSE 3000
+
+# Start server (the server should serve the built client or API)
+CMD ["npm", "run", "start:server"]
