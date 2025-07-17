@@ -1,19 +1,18 @@
 {
   "compilerOptions": {
-    /* Language and Environment */
-    "target": "ES2016",                 /* Modern JS, Node safe */
-    "module": "commonjs",               /* For Node */
-    "rootDir": "./src",                 /* YOUR SOURCE FOLDER */
-    "outDir": "./dist",                 /* WHERE COMPILED JS LANDS */
-
-    /* Interop and Imports */
-    "esModuleInterop": true,            /* Good for import express, etc */
+    "target": "ES2020",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-
-    /* Type Checking */
-    "strict": true,                     /* Strict mode all the way */
-    "skipLibCheck": true                /* Ignore d.ts noise */
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "noEmitOnError": true,
+    "strict": true,
+    "skipLibCheck": true
   },
-  "include": ["src/**/*.ts"],           /* ALL .ts FILES under src/ */
-  "exclude": ["node_modules"]           /* Stay away from node_modules */
+  "include": ["src/server.ts"],
+  "exclude": ["node_modules"]
 }
