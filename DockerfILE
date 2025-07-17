@@ -1,27 +1,32 @@
-# Use Node base image
+# 1 Use slim Node base
 FROM node:22-alpine
 
-# Set working dir
+# 2 Set work dir
 WORKDIR /app
 
-# Copy root package files first (for layer caching)
-COPY package*.json ./
-
-# Copy client and server package files too (optional if you run separate npm install)
-COPY client/package*.json ./client/
+# 3 Copy backend package first for caching
 COPY server/package*.json ./server/
 
-# Install all dependencies (root + subfolders)
-RUN npm install
+# 4 Install backend deps
+RUN cd server && npm install
 
-# Copy everything else
+# 5 Copy client package for caching
+COPY client/package*.json ./client/
+
+# 6 Install client deps
+RUN cd client && npm install
+
+# 7 Copy whole source
 COPY . .
 
-# Build Angular client + Node server
-RUN npm run build
+# 8 Build Angular
+RUN cd client && npm run build
 
-# Expose server port (adjust if your server runs on different port)
+# 9 Build Node backend (TS → JS)
+RUN cd server && npm run build
+
+# 10 Expose port
 EXPOSE 3000
 
-# Start server (the server should serve the built client or API)
-CMD ["npm", "run", "start:server"]
+# 11 Start server (should serve static files too)
+CMD ["node", "server/dist/index.js"]
